@@ -12,7 +12,7 @@ func RunApp(port string) {
 	r := mux.NewRouter()
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		ws := websocket.NewConnection(w, r)
-		ws.HandleMessageLoop()
+		go ws.HandleMessageLoop()
 	})
 	http.ListenAndServe(":"+port, r)
 }
